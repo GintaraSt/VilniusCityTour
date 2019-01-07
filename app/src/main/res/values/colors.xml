@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#31bcd5</color>
+    <color name="colorPrimaryDark">#1b8295</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorBackground">#ffffff</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="colorPurpleLight">#c084f7</color>
+    <color name="colorPurpleMedium">#af65f4</color>
+    <color name="colorCardBackground">#f2e9fb</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorGreenLight">#a1e9ad</color>
+    <color name="colorGreenMedium">#80d28e</color>
+    <color name="colorOrangeLight">#e9cba1</color>
+    <color name="colorOrangeMedium">#deb671</color>
+    <color name="colorBlueLight">#6964ea</color>
+    <color name="colorBlueMedium">#4f4ccd</color>
+    <color name="colorLightGrey">#dddddd</color>
+</resources>

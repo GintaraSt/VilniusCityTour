@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/add_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorPurpleMedium"
+        android:ellipsize="end"
+        android:hint="@string/title"
+        android:maxLines="1"
+        android:padding="8dp"
+        android:textAlignment="textStart"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhite"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/select_type"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/select_type"
+        android:layout_width="wrap_content"
+        android:minWidth="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_weight="3"
+        android:background="@color/colorPurpleLight"
+        android:text="@string/tap_to_set"
+        android:padding="8dp"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhite"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/add_image"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:padding="8dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_title" />
+
+    <View
+        android:id="@+id/place_info"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/colorPurpleLight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_image"/>
+
+    <ImageView
+        android:id="@+id/location_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:clickable="false"
+        android:src="@drawable/baseline_place_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_image" />
+
+    <ImageView
+        android:id="@+id/car_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:clickable="false"
+        android:src="@drawable/baseline_navigation_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/location_icon" />
+
+    <EditText
+        android:id="@+id/add_address_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="120dp"
+        android:layout_marginStart="8dp"
+        android:clickable="false"
+        android:ellipsize="end"
+        android:hint="@string/full_address_line"
+        android:maxLines="1"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhite"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/location_icon"
+        app:layout_constraintTop_toTopOf="@+id/place_info" />
+
+    <TextView
+        android:id="@+id/distance_from_current_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:clickable="false"
+        android:hint="@string/distance"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhite"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/location_icon"
+        app:layout_constraintTop_toBottomOf="@+id/add_address_line" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:clickable="false"
+        android:gravity="center_vertical"
+        android:text="@string/tap_to_get_direction"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/car_icon"
+        app:layout_constraintTop_toBottomOf="@+id/distance_from_current_location" />
+
+    <TextView
+        android:id="@+id/add_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:hint="@string/price"
+        android:maxWidth="130dp"
+        android:maxLines="1"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhite"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/place_info"
+        app:layout_constraintStart_toEndOf="@+id/add_address_line"
+        app:layout_constraintTop_toTopOf="@+id/place_info" />
+
+    <EditText
+        android:id="@+id/set_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:maxLength="5"
+        android:inputType="number"
+        android:hint="@string/set_price"
+        android:paddingTop="0dp"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhite"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/add_price"
+        app:layout_constraintTop_toTopOf="@+id/add_price" />
+
+    <TextView
+        android:id="@+id/rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rating"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/place_info"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/add_price"
+        app:layout_constraintTop_toBottomOf="@+id/set_price" />
+
+    <LinearLayout
+        android:id="@+id/rating_stars"
+        android:layout_width="126dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/place_info"
+        app:layout_constraintStart_toStartOf="@+id/rating"
+        app:layout_constraintTop_toBottomOf="@+id/rating">
+
+        <ImageView
+            android:id="@+id/rating_1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="2dp"
+            android:layout_weight="1"
+            android:src="@drawable/sharp_star_border_24" />
+
+        <ImageView
+            android:id="@+id/rating_2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="2dp"
+            android:layout_weight="1"
+            android:src="@drawable/sharp_star_border_24" />
+
+        <ImageView
+            android:id="@+id/rating_3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="2dp"
+            android:layout_weight="1"
+            android:src="@drawable/sharp_star_border_24" />
+
+        <ImageView
+            android:id="@+id/rating_4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="2dp"
+            android:layout_weight="1"
+            android:src="@drawable/sharp_star_border_24" />
+
+        <ImageView
+            android:id="@+id/rating_5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="2dp"
+            android:layout_weight="1"
+            android:src="@drawable/sharp_star_border_24" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/website"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+
+        android:layout_marginEnd="8dp"
+        android:background="@color/colorPurpleMedium"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/place_info">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/website"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/set_websites_url"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:hint="@string/site_address"
+            android:maxLines="1"
+            android:padding="8dp"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorWhite"
+            android:textSize="16sp" />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

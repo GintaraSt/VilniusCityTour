@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">VilniusCityTour</string>
+
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="failed_to_get_location">Failed to get location</string>
+    <string name="location_unavailable">Location unavailable</string>
+    <string name="location_temporary_unavailable">Location temporary unavailable</string>
+    <string name="location_provider_disabled">Location provider disabled</string>
+    <string name="location_provider_enabled">Location provider enabled</string>
+    <string name="tap_to_get_direction">Tap to get directions</string>
+    <string name="rating">Rating:</string>
+    <string name="not_rated">not rated yet</string>
+    <string name="website">Website:</string>
+    <string name="title_activity_live">LiveActivity</string>
+    <string name="title_activity_food">FoodActivity</string>
+    <string name="title">Title</string>
+    <string name="type">Type</string>
+    <string name="full_address_line">Full address line</string>
+    <string name="distance">distance auto-calculated</string>
+    <string name="price">Price:</string>
+    <string name="set_price">$$$</string>
+    <string name="site_address">www.radisonBlue.com/home</string>
+    <string name="food">Food</string>
+    <string name="live">Live</string>
+    <string name="culture">Culture</string>
+    <string name="events">Events</string>
+    <string name="settings">Settings</string>
+    <string name="manage_places">Manage places</string>
+    <string name="title_activity_manage_places">MainActivity</string>
+    <string name="tap_to_set">tap to set</string>
+    <string name="add_place">Add place</string>
+    <string name="please_select_type">Please select place type</string>
+    <string name="please_add_title">Please add place title</string>
+    <string name="please_add_address">Please add place address</string>
+    <string name="please_add_price">Please add place price</string>
+    <string name="place_adding_successful">Place added successfully</string>
+    <string name="undo">UNDO</string>
+    <string name="undone">Undone successfully</string>
+    <string name="places_data_erased">All places has been erased!</string>
+    <string name="file_restored">File restored successfully</string>
+    <string name="file_does_not_exist">File does not exist</string>
+    <string name="erase_data">Erase data</string>
+    <string name="remove_place">Remove place</string>
+</resources>

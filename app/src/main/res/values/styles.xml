@@ -1,0 +1,31 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!-- Tab Layout style. -->
+    <style name="TabLayoutMain" parent="Widget.Design.TabLayout">
+        <!-- Customize your theme here. -->
+        <item name="tabBackground">@color/colorPrimary</item>
+        <item name="tabTextColor">@color/colorWhite</item>
+        <item name="tabIndicatorColor">@color/colorPrimaryDark</item>
+        <item name="tabIndicatorHeight">64dp</item>
+    </style>
+
+    <!-- Drawer menu item style. -->
+    <style name="DrawerMenuItem" parent="Widget.Design.NavigationView">
+        <!-- Customize your theme here. -->
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/colorLightGrey</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+</resources>
