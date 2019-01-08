@@ -41,5 +41,6 @@
     <string name="file_restored">File restored successfully</string>
     <string name="file_does_not_exist">File does not exist</string>
     <string name="erase_data">Erase data</string>
-    <string name="remove_place">Remove place</string>
+    <string name="manage_place">Manage places</string>
+    <string name="done_managing">Done managing</string>
 </resources>

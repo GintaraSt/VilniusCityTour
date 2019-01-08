@@ -6,8 +6,8 @@
     android:name="com.example.ginta.vilniuscitytour.RemovePlaceFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
     app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-    tools:context=".RemovePlaceFragment"
-    tools:listitem="@layout/remove_place_item" />
+    tools:context=".ManagePlaceFragment"
+    tools:listitem="@layout/manage_place_item" />

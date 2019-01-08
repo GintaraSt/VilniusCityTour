@@ -16,4 +16,6 @@
     <color name="colorBlueLight">#6964ea</color>
     <color name="colorBlueMedium">#4f4ccd</color>
     <color name="colorLightGrey">#dddddd</color>
+    <color name="colorGreen">#00aa00</color>
+    <color name="colorRed">#aa0000</color>
 </resources>

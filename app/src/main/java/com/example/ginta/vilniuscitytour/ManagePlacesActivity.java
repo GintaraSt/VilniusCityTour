@@ -1,9 +1,13 @@
 package com.example.ginta.vilniuscitytour;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,15 +18,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ginta.vilniuscitytour.dummy.DummyContent;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileDescriptor;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 
 public class ManagePlacesActivity extends AppCompatActivity {
     public final static String filename = "places.dat";
+    private boolean isFragmentDisplayed = false;
     private boolean dataWasDeleted = false;
     private int rating = -1;
     private int placeType = -1;
@@ -32,12 +42,34 @@ public class ManagePlacesActivity extends AppCompatActivity {
         public void onClick(View v) {
             Toast.makeText(ManagePlacesActivity.this, R.string.undone, Toast.LENGTH_SHORT).show();
             restoreDataFileFromBackup();
+            ActivityMain.updatePlaces();
         }
     };
-    private View.OnClickListener removePlaceListener = new View.OnClickListener() {
+    private View.OnClickListener managePlaceListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
+            ManagePlaceFragment managePlaceFragment;
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            Button managePlacesButton = (Button) findViewById(R.id.manage_place);
+            if(!isFragmentDisplayed) {
+                managePlaceFragment = new ManagePlaceFragment();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.add(R.id.manage_places_container, managePlaceFragment).addToBackStack(null).commit();
+                isFragmentDisplayed = true;
+                managePlacesButton.setText(R.string.done_managing);
+            } else {
+                 managePlaceFragment = (ManagePlaceFragment) fragmentManager
+                        .findFragmentById(R.id.manage_places_container);
+                if (managePlaceFragment != null) {
+                    FragmentTransaction fragmentTransaction =
+                            fragmentManager.beginTransaction();
+                    fragmentTransaction.remove(managePlaceFragment).commit();
+                } else {
+                    Toast.makeText(ManagePlacesActivity.this, "Failed to find fragment", Toast.LENGTH_SHORT).show();
+                }
+                isFragmentDisplayed = false;
+                managePlacesButton.setText(R.string.manage_place);
+            }
         }
     };
 
@@ -50,6 +82,8 @@ public class ManagePlacesActivity extends AppCompatActivity {
         addPlace();         //add place if all required fields was filled
         setType();          //set type by taping on type
         resetDataFile();    //erase all data in places file
+        Button managePlacesButton = (Button) findViewById(R.id.manage_place);
+        managePlacesButton.setOnClickListener(managePlaceListener);
     }
 
     private void addPlace(){
@@ -85,6 +119,7 @@ public class ManagePlacesActivity extends AppCompatActivity {
 
                 Snackbar.make(findViewById(R.id.scrollView), R.string.place_adding_successful, BaseTransientBottomBar.LENGTH_LONG)
                         .setAction(R.string.undo, undoOnClickListener).show();
+                ActivityMain.updatePlaces();
             }
         });
     }

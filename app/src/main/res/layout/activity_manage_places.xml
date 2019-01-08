@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ManagePlacesActivity">
-
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -34,7 +33,7 @@
             app:layout_constraintTop_toBottomOf="@+id/include" />
 
         <Button
-            android:id="@+id/remove_place"
+            android:id="@+id/manage_place"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
@@ -44,23 +43,31 @@
             android:background="@color/colorPurpleMedium"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:text="@string/remove_place"
+            android:text="@string/manage_place"
             android:textColor="@color/colorWhite"
             android:textSize="22sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/add_place" />
 
+        <FrameLayout
+            android:id="@+id/manage_places_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/erase_data"
+            app:layout_constraintTop_toBottomOf="@+id/manage_place"/>
+
         <Button
             android:id="@+id/erase_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="72dp"
+            android:layout_marginBottom="8dp"
             android:background="@color/colorOrangeMedium"
+            android:padding="16dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:text="@string/erase_data"
@@ -68,8 +75,8 @@
             android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/remove_place" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 
