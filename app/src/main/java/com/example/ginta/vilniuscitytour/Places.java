@@ -15,6 +15,7 @@ public class Places {
     private int mPriceInUSD = 0;
     private String mPriceMeaning = "ERROR"; //price meaning (USD/NIGHT, USD/TICKET etc)
     private int placeType = -1;
+    private String addressLine;
     private ArrayList<Integer> mImageResourceIds = new ArrayList<Integer>(); //if mImageResourceIds.size() = 0 - no images
     private static int mPriceLimitCheap = 5;   //below this value, price is considered as cheap
     //between above and bellow values price is considered as average
@@ -150,15 +151,19 @@ public class Places {
     //temp - change latter
     public Places(String address, String Title, int PlaceType, int Price, float Rating, String Url){
         this(54.681394, 25.271294, Title, PlaceType, Price, Rating, Url);
+        addressLine = address;
     }
     public Places(String address, String Title, int PlaceType, int Price, String Url){
         this(54.681394, 25.271294, Title, PlaceType, Price, Url);
+        addressLine = address;
     }
     public Places(String address, String Title, int PlaceType, int Price, float Rating){
         this(54.681394, 25.271294, Title, PlaceType, Price, Rating);
+        addressLine = address;
     }
     public Places(String address, String Title, int PlaceType, int Price){
         this(54.681394, 25.271294, Title, PlaceType, Price);
+        addressLine = address;
     }
 
     public Places(double latitude, double longitude, String Title, int PlaceType, int Price, float Rating, String Url){
@@ -184,15 +189,7 @@ public class Places {
     ***************Getter methods********************
     *************************************************/
     public String getAddress(){
-        String address = placeLocation.getAddress();
-        String temp = "";
-        int i=0;
-        while(i < address.length() - 26){
-            temp = temp + address.charAt(i);
-            i++;
-        }
-        //Log.w("Places", "Substring of address is - " + temp);
-        return temp;
+        return addressLine;
     }
 
     public String getDistanceFromUser(){

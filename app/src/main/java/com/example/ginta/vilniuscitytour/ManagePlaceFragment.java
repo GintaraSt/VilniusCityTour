@@ -11,22 +11,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.ginta.vilniuscitytour.dummy.DummyContent;
-import com.example.ginta.vilniuscitytour.dummy.DummyContent.DummyItem;
+import java.util.ArrayList;
 
 /**
  * A fragment representing a list of Items.
  */
 public class ManagePlaceFragment extends Fragment {
-
-    private RecyclerView recyclerView;
-    // TODO: Customize parameter argument names
-    private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
-    private int mColumnCount = 1;
+    private ArrayList<Places> placesArrayList;
     private View.OnClickListener deleteItemListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            int position = (Integer) v.getTag(R.id.manage_places_list_item_button);
+            ManagePlacesActivity.deletePlace(placesArrayList.get(position));
             Toast.makeText(getContext(), "delete position: " + v.getTag(R.id.manage_places_list_item_button), Toast.LENGTH_SHORT).show();
         }
     };
@@ -44,25 +40,6 @@ public class ManagePlaceFragment extends Fragment {
     public ManagePlaceFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static ManagePlaceFragment newInstance(int columnCount) {
-        ManagePlaceFragment fragment = new ManagePlaceFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-        }
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -70,10 +47,11 @@ public class ManagePlaceFragment extends Fragment {
 
         // Set the adapter
         if (view instanceof RecyclerView) {
+            placesArrayList = ActivityMain.getPlacesList(Places.LIVE);
             Context context = view.getContext();
-            recyclerView = (RecyclerView) view;
+            RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(new ManageItemRecyclerViewAdapter(ActivityMain.getPlacesList(Places.LIVE), deleteItemListener, editItemListener));
+            recyclerView.setAdapter(new ManageItemRecyclerViewAdapter(placesArrayList, deleteItemListener, editItemListener));
             recyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
                     DividerItemDecoration.VERTICAL));
         }
@@ -83,17 +61,6 @@ public class ManagePlaceFragment extends Fragment {
         view.setLayoutParams(params);
         //--------------------------------------------
         return view;
-    }
-
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
     }
 
 }

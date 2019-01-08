@@ -1,5 +1,6 @@
 package com.example.ginta.vilniuscitytour;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,16 +34,19 @@ import java.util.List;
 
 public class ManagePlacesActivity extends AppCompatActivity {
     public final static String filename = "places.dat";
+    //Todo: find a solution without creating static Context and ScrollView variables
+    private static Context mContext;
+    private static ScrollView scrollView;
     private boolean isFragmentDisplayed = false;
-    private boolean dataWasDeleted = false;
+    private static boolean dataWasDeleted = false;
     private int rating = -1;
     private int placeType = -1;
-    private StringBuilder dataBackup = new StringBuilder();
+    private static StringBuilder dataBackup = new StringBuilder();
     private View.OnClickListener undoOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Toast.makeText(ManagePlacesActivity.this, R.string.undone, Toast.LENGTH_SHORT).show();
-            restoreDataFileFromBackup();
+            ManagePlacesActivity.restoreDataFileFromBackup();
             ActivityMain.updatePlaces();
         }
     };
@@ -77,6 +82,8 @@ public class ManagePlacesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_places);
+        mContext = getApplicationContext();
+        scrollView = (ScrollView) findViewById(R.id.scrollView);
         //all bellow methods sets on click listeners for specific fields to do needed actions
         setRating();        //set rating by taping on stars image views
         addPlace();         //add place if all required fields was filled
@@ -120,6 +127,7 @@ public class ManagePlacesActivity extends AppCompatActivity {
                 Snackbar.make(findViewById(R.id.scrollView), R.string.place_adding_successful, BaseTransientBottomBar.LENGTH_LONG)
                         .setAction(R.string.undo, undoOnClickListener).show();
                 ActivityMain.updatePlaces();
+
             }
         });
     }
@@ -249,8 +257,8 @@ public class ManagePlacesActivity extends AppCompatActivity {
         });
     }
 
-    private void createDataFileBackup(){
-        File places = new File(getApplicationContext().getFilesDir(), filename);
+    private static void createDataFileBackup(){
+        File places = new File(mContext.getFilesDir(), filename);
         //if data was erased from file before, clear old dataBackup
         if(dataWasDeleted) {
             dataBackup = new StringBuilder();
@@ -279,12 +287,12 @@ public class ManagePlacesActivity extends AppCompatActivity {
         }
     }
 
-    private void restoreDataFileFromBackup(){
+    private static void restoreDataFileFromBackup(){
         File places = new File(filename);
         if(dataWasDeleted) dataWasDeleted = false;
         //if places doesn't exist create new file (it shouldn't exist cuz it was deleted)
         if (!places.exists()){
-            places = new File(getApplicationContext().getFilesDir(), filename);
+            places = new File(mContext.getFilesDir(), filename);
         }
         String mDataBackup = dataBackup.toString();
         //if data backup isn't empty - restore
@@ -309,5 +317,56 @@ public class ManagePlacesActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    public static void deletePlace(Places place){
+        createDataFileBackup();
+        String[] data = dataBackup.toString().split(System.getProperty("line.separator"));
+        String type = "" + place.getPlaceTypeConst();
+        String title = place.getTitle();
+        String address = place.getAddress();
+        String price = "" + place.getPriceInUSD();
+        for(int i=0; i < data.length; i+=6 ){
+            Log.e("ManagePlacesActivity:  ", "data length before removeElement: " + data.length/6);
+            if(data[i].equals(type) && data[i+1].equals(title) && data[i+2].equals(address) && data[i+3].equals(price)){
+                Log.e("ManagePlacesActivity:  ", "data length before removeElement: " + data.length/6);
+                data = removeElement(data, i);
+                Log.e("ManagePlacesActivity:  ", "data length after removeElement: " + data.length/6);
+                StringBuilder temp = dataBackup;
+                dataBackup = new StringBuilder();
+                Log.e("ManagePlacesActivity:  ", "data length: " + data.length/6);
+                for(int j=0; j<data.length-1; j++){
+                    dataBackup.append(data[j]);
+                    dataBackup.append("\n");
+                }
+                Log.e("ManagePlacesActivity:  ", "data: " + dataBackup);
+                restoreDataFileFromBackup();
+                dataBackup = new StringBuilder();
+                dataBackup = temp;
+                Snackbar.make(scrollView, R.string.place_adding_successful, BaseTransientBottomBar.LENGTH_LONG)
+                        .setAction(R.string.undo, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Toast.makeText(mContext, R.string.undone, Toast.LENGTH_SHORT).show();
+                                restoreDataFileFromBackup();
+                                ActivityMain.updatePlaces();
+                            }
+                        }).show();
+                break;
+            }
+        }
+        ActivityMain.updatePlaces();
+    }
+
+    private static String[] removeElement(String[] data, int index){
+        String[] rezData = new String[data.length - 6];
+        for(int i=0; i<index; i++){
+            rezData[i] = data[i];
+        }
+        index += 6;
+        for(int i=index; i<data.length; i++){
+            rezData[i-6] = data[i];
+        }
+        return rezData;
     }
 }

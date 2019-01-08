@@ -109,14 +109,12 @@ public class ActivityMain extends AppCompatActivity {
         File file = new File(getContext().getFilesDir(), ManagePlacesActivity.filename);
         BufferedReader placesData = null;
         String line;
-
         int type;
         String title;
         String address;
         int price;
         String website;
         int rating;
-
         try {
             placesData = new BufferedReader(new FileReader(file));
             while((line = placesData.readLine()) != null){
