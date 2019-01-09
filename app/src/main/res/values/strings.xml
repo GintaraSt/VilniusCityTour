@@ -35,6 +35,7 @@
     <string name="please_add_address">Please add place address</string>
     <string name="please_add_price">Please add place price</string>
     <string name="place_adding_successful">Place added successfully</string>
+    <string name="place_removing_successful">Place removed successfully</string>
     <string name="undo">UNDO</string>
     <string name="undone">Undone successfully</string>
     <string name="places_data_erased">All places has been erased!</string>

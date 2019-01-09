@@ -119,6 +119,7 @@ public class ActivityMain extends AppCompatActivity {
             placesData = new BufferedReader(new FileReader(file));
             while((line = placesData.readLine()) != null){
                  type = Integer.parseInt(line);
+                 //Note: element with parseInt may throw exception if order in data file is wrong!!!
                  title = placesData.readLine();
                  address = placesData.readLine();
                  price = Integer.parseInt(placesData.readLine());

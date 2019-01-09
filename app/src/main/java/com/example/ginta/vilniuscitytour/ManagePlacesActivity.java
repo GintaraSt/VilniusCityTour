@@ -236,34 +236,36 @@ public class ManagePlacesActivity extends AppCompatActivity {
         eraseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                File places = new File(getApplicationContext().getFilesDir(), filename);
                 //create backup of file before deleting
                 createDataFileBackup();
                 //delete file
-                try {
-                    //open file
-                    BufferedWriter placesData = new BufferedWriter(new FileWriter(places));
-                    //close it to delete all content inside
-                    placesData.close();
-                    Snackbar.make(findViewById(R.id.scrollView), R.string.places_data_erased, Snackbar.LENGTH_LONG)
-                            .setAction(R.string.undo, undoOnClickListener).show(); //if undo pressed call undo method to restore file from backup
-                } catch (IOException e) {
-                    Log.e("ManagePlacesActivity:  ", "failed to erase file data");
-                    e.printStackTrace();
-                }
+                eraseFileData();
+                Snackbar.make(findViewById(R.id.scrollView), R.string.places_data_erased, Snackbar.LENGTH_LONG)
+                        .setAction(R.string.undo, undoOnClickListener).show(); //if undo pressed call undo method to restore file from backup
 
                 dataWasDeleted = true;
             }
         });
     }
 
+    private static void eraseFileData(){
+        File places = new File(mContext.getFilesDir(), filename);
+        try {
+            //open file
+            BufferedWriter placesData = new BufferedWriter(new FileWriter(places));
+            //close it to delete all content inside
+            placesData.close();
+        } catch (IOException e) {
+            Log.e("ManagePlacesActivity:  ", "failed to erase file data");
+            e.printStackTrace();
+        }
+    }
+
     private static void createDataFileBackup(){
         File places = new File(mContext.getFilesDir(), filename);
-        //if data was erased from file before, clear old dataBackup
-        if(dataWasDeleted) {
-            dataBackup = new StringBuilder();
-            dataWasDeleted = false;
-        }
+        //clear old dataBackup
+        dataBackup = new StringBuilder();
+        dataWasDeleted = false;
         BufferedReader placesData = null;
         try {
             String line;
@@ -327,23 +329,18 @@ public class ManagePlacesActivity extends AppCompatActivity {
         String address = place.getAddress();
         String price = "" + place.getPriceInUSD();
         for(int i=0; i < data.length; i+=6 ){
-            Log.e("ManagePlacesActivity:  ", "data length before removeElement: " + data.length/6);
             if(data[i].equals(type) && data[i+1].equals(title) && data[i+2].equals(address) && data[i+3].equals(price)){
-                Log.e("ManagePlacesActivity:  ", "data length before removeElement: " + data.length/6);
                 data = removeElement(data, i);
-                Log.e("ManagePlacesActivity:  ", "data length after removeElement: " + data.length/6);
                 StringBuilder temp = dataBackup;
                 dataBackup = new StringBuilder();
-                Log.e("ManagePlacesActivity:  ", "data length: " + data.length/6);
-                for(int j=0; j<data.length-1; j++){
+                for(int j=0; j<data.length; j++){
                     dataBackup.append(data[j]);
                     dataBackup.append("\n");
                 }
-                Log.e("ManagePlacesActivity:  ", "data: " + dataBackup);
                 restoreDataFileFromBackup();
                 dataBackup = new StringBuilder();
                 dataBackup = temp;
-                Snackbar.make(scrollView, R.string.place_adding_successful, BaseTransientBottomBar.LENGTH_LONG)
+                Snackbar.make(scrollView, R.string.place_removing_successful, BaseTransientBottomBar.LENGTH_LONG)
                         .setAction(R.string.undo, new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
