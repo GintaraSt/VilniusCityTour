@@ -1,7 +1,6 @@
 # VilniusCityTour <br>
 App represents 4 cathegories of places to visit in city "Vilnius" <br>
 All data in app is just a place holders for testing purposes at the moment <br>
--To be added - delete place function <br>
 -To be added - edit place function <br>
 -To be added - settings activity <br>
 -To be added - images support <br>
