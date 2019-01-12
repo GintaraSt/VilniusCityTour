@@ -1,18 +1,24 @@
 package com.example.ginta.vilniuscitytour;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BaseTransientBottomBar;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -82,6 +88,9 @@ public class ManagePlacesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_places);
+        //set keyboard to stay hidden on activity start
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
         mContext = getApplicationContext();
         scrollView = (ScrollView) findViewById(R.id.scrollView);
         //all bellow methods sets on click listeners for specific fields to do needed actions
@@ -91,6 +100,54 @@ public class ManagePlacesActivity extends AppCompatActivity {
         resetDataFile();    //erase all data in places file
         Button managePlacesButton = (Button) findViewById(R.id.manage_place);
         managePlacesButton.setOnClickListener(managePlaceListener);
+
+        //get drawer layout so we could close and open it when needed
+        final DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+
+        ImageView drawerButton = (ImageView) findViewById(R.id.drawer_button);
+        drawerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(Gravity.START, true);
+            }
+        });
+
+
+        //get navigation view to assign item selected listener
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        //set listener to get notified when item was selected
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                menuItem.setChecked(true);
+                drawerLayout.closeDrawers();
+                Intent activity;
+                switch (menuItem.getItemId()){
+                    //case selected items id is equal to one of the view pagers items - set view pagers current item to selected one
+                    case R.id.nav_live:
+                        activity = new Intent(ManagePlacesActivity.this, ActivityMain.class);
+                        activity.putExtra("CATEGORY", 0);
+                        startActivity(activity);
+                        break;
+                    case R.id.nav_food:
+                        activity = new Intent(ManagePlacesActivity.this, ActivityMain.class);
+                        activity.putExtra("CATEGORY", 1);
+                        startActivity(activity);
+                        break;
+                    case R.id.nav_culture:
+                        activity = new Intent(ManagePlacesActivity.this, ActivityMain.class);
+                        activity.putExtra("CATEGORY", 2);
+                        startActivity(activity);
+                        break;
+                    case R.id.nav_events:
+                        activity = new Intent(ManagePlacesActivity.this, ActivityMain.class);
+                        activity.putExtra("CATEGORY", 3);
+                        startActivity(activity);
+                        break;
+                }
+                return true;
+            }
+        });
     }
 
     private void addPlace(){

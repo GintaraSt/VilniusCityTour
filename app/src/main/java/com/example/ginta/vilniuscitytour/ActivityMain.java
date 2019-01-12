@@ -35,6 +35,7 @@ import java.util.ArrayList;
  */
 public class ActivityMain extends AppCompatActivity {
     private static Context context;
+    private ViewPager viewPager;
     private static LocationManager locationManager;
     public static Context getContext() {
         return context;
@@ -59,7 +60,7 @@ public class ActivityMain extends AppCompatActivity {
         //read places file to get all data about saved places
         loadPlaces();
 
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
+        viewPager = (ViewPager) findViewById(R.id.view_pager);
         PlacesFragmentPagerAdapter adapter = new PlacesFragmentPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
 
@@ -102,6 +103,11 @@ public class ActivityMain extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         //when the activity is visible again update array list
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String value = extras.getString("EXTRA_PAGE");
+            viewPager.setCurrentItem(extras.getInt("CATEGORY"));
+        }
         updatePlaces();
     }
 
