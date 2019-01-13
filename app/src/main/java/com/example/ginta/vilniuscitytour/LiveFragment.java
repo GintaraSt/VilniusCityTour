@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -48,9 +49,20 @@ public class LiveFragment extends Fragment {
                         startActivity(intent);
                     }
                     if (v.getId() == R.id.website) {
+                        String websites_url = places1.getUrl();
                         Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setData(Uri.parse(places1.getUrl()));
-                        startActivity(intent);
+                        if(websites_url.toLowerCase().contains("http://") || websites_url.toLowerCase().contains("https://")){
+                            intent.setData(Uri.parse(websites_url));
+                        } else {
+                            String web_url = "http://" + websites_url;
+                            intent.setData(Uri.parse(web_url));
+                        }
+                        try{
+                            startActivity(intent);
+                        } catch (Exception e){
+                            Toast.makeText(getContext(), R.string.invalid_url, Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
                     }
                 }
             };

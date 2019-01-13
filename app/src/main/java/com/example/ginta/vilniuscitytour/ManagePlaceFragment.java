@@ -29,6 +29,9 @@ public class ManagePlaceFragment extends Fragment {
     private View.OnClickListener editItemListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            int position = (Integer) v.getTag(R.id.manage_places_list_item_button);
+            ManagePlacesActivity.enterEditMode(placesArrayList.get(position));
+            //ManagePlacesActivity: sate changes
             Toast.makeText(getContext(), "edit position: " + v.getTag(R.id.manage_places_list_item_button), Toast.LENGTH_SHORT).show();
         }
     };

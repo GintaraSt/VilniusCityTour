@@ -112,7 +112,7 @@ public class ActivityMain extends AppCompatActivity {
     }
 
     private static void loadPlaces(){
-        File file = new File(getContext().getFilesDir(), ManagePlacesActivity.filename);
+        File file = new File(getContext().getFilesDir(), ManagePlacesActivity.filename);//nullpointer???
         BufferedReader placesData = null;
         String line;
         int type;

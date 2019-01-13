@@ -44,4 +44,8 @@
     <string name="erase_data">Erase data</string>
     <string name="manage_place">Manage places</string>
     <string name="done_managing">Done managing</string>
+    <string name="save_changes">Save changes</string>
+    <string name="discard_changes">Discard changes</string>
+    <string name="changes_saved">Changes to place saved</string>
+    <string name="invalid_url">Invalid url</string>
 </resources>
