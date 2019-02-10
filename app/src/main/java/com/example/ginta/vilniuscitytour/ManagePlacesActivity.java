@@ -117,7 +117,7 @@ public class ManagePlacesActivity extends AppCompatActivity {
 
 
         //get navigation view to assign item selected listener
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         //set listener to get notified when item was selected
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -130,6 +130,7 @@ public class ManagePlacesActivity extends AppCompatActivity {
                     case R.id.nav_live:
                         activity = new Intent(ManagePlacesActivity.this, ActivityMain.class);
                         activity.putExtra("CATEGORY", 0);
+
                         startActivity(activity);
                         break;
                     case R.id.nav_food:
